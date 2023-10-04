@@ -1,0 +1,12 @@
+---
+title: "p8105_hw2_NL2836"
+author: "Ngan Le"
+date: "2023-10-04"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
