@@ -12,7 +12,7 @@ library(readr)
 
 # Problem 1
 
-Read the dataset into R Studio, then clean up accordingly.
+Read the dataset pols-month into R Studio, then clean up accordingly.
 
 ``` r
 pols_data = 
@@ -20,7 +20,26 @@ pols_data =
   separate(mon, into = c("year","month","day"), sep = "-") %>%
   mutate(
     month = month.abb[as.integer(month)],
-    president = ifelse(prez_gop == 1, "gop", ifelse(prez_dem == 1, "dem", NA))
+    president = case_when(
+      prez_gop == 1 ~ "gop",
+      prez_dem == 1 ~ "dem",
+      TRUE ~ NA_character_)
   ) %>% 
   select(-prez_dem, -prez_gop, -day)
+```
+
+Read the dataset snp into R Studio, then clean up accordingly.
+
+``` r
+snp_data = 
+  read_csv("./fivethirtyeight_datasets/snp.csv") %>% 
+  mutate(
+    date = as.Date(date, format = "%m/%d/%y"),
+    year = format(date, "%Y"),
+    month = format(date, "%m"),
+    month = month.abb[as.integer(month)]
+  ) %>%
+  select(-date) %>%
+  arrange(year, month) %>% 
+  select(year, month, everything())
 ```
