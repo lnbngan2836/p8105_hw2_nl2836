@@ -43,3 +43,17 @@ snp_data =
   arrange(year, month) %>% 
   select(year, month, everything())
 ```
+
+Read the dataset unemployment into R Studio, then clean up accordingly.
+
+``` r
+unemp_data = 
+  read_csv("./fivethirtyeight_datasets/unemployment.csv") %>% 
+  pivot_longer(
+    Jan:Dec,
+    names_to = "month",
+    values_to = "unemployment_rate") %>% 
+  rename(year = Year)
+
+view(unemp_data)
+```
