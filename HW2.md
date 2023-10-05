@@ -72,3 +72,23 @@ merged_data = pols_data %>%
   
 view(merged_data)
 ```
+
+View the merged dataset and short description.
+
+``` r
+view(merged_data)
+```
+
+The merged dataset `merged_data` from the 3 datasets `pols_data`,
+`snp_data`, `unemp_data` contains:
+
+- The information on the number of Republican and Democratic senators
+  (`gop_sen`, `dem_sen`) and presidents (`president`), the closing
+  values of the S&P stock index (`close`), and unemployment rate
+  (`unemployment_rate`); all reported monthly from 1947 to 2015.
+- 11 columns (variables), and 822 rows (observations).
+- Each of the three dataset was modified to have the variables `year`
+  and `month`.
+- Additionally, `snp_data` contains the the closing values of the S&P
+  stock index (`close`); `unemp_data` contains the unemployment rate
+  (`unemployment_rate`); the rest of the mentioned are `pols_data`.
