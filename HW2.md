@@ -94,22 +94,44 @@ The merged dataset `merged_data` from the 3 datasets `pols_data`,
 Rename the `202309 Trashwheel Collection Data` file locally to
 `trashwheel`.
 
-Load the dataset.
+Load the Mr. Trashwheel dataset.
 
 ``` r
-trashwheel_data = 
+mrtrashwheel_data = 
   read_excel("./trashwheel.xlsx", sheet = "Mr. Trash Wheel") %>% 
   janitor::clean_names() %>% 
   select(dumpster:homes_powered) %>% 
   drop_na(dumpster) %>% 
   mutate(
-    home_powered = (weight_tons*500)/30)
+    homes_powered = (weight_tons*500)/30)
 ```
 
     ## New names:
     ## • `` -> `...15`
     ## • `` -> `...16`
 
+Load the Prof. Trashwheel dataset.
+
 ``` r
-view(trashwheel_data)
+proftrashwheel_data = 
+  read_excel("./trashwheel.xlsx", sheet = "Professor Trash Wheel") %>% 
+  janitor::clean_names() %>% 
+  select(dumpster:homes_powered) %>% 
+  drop_na(dumpster) %>% 
+  mutate(
+    homes_powered = (weight_tons*500)/30)
 ```
+
+Load the Gwynnda Trashwheel dataset.
+
+``` r
+gwynntrashwheel_data = 
+  read_excel("./trashwheel.xlsx", sheet = "Gwynnda Trash Wheel") %>% 
+  janitor::clean_names() %>% 
+  select(dumpster:homes_powered) %>% 
+  drop_na(dumpster) %>% 
+  mutate(
+    homes_powered = (weight_tons*500)/30)
+```
+
+# Problem 2
