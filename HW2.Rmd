@@ -17,8 +17,8 @@ library(readr)
 Read the dataset into R Studio, then clean up accordingly.
 
 
-```{r load 538, show_col_types = FALSE}
-p1_data = 
+```{r load 538, message = FALSE}
+pols_data = 
   read_csv("./fivethirtyeight_datasets/pols-month.csv") %>% 
   separate(mon, into = c("year","month","day"), sep = "-") %>%
   mutate(

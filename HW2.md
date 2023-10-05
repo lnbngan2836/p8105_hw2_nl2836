@@ -15,7 +15,7 @@ library(readr)
 Read the dataset into R Studio, then clean up accordingly.
 
 ``` r
-p1_data = 
+pols_data = 
   read_csv("./fivethirtyeight_datasets/pols-month.csv") %>% 
   separate(mon, into = c("year","month","day"), sep = "-") %>%
   mutate(
@@ -24,12 +24,3 @@ p1_data =
   ) %>% 
   select(-prez_dem, -prez_gop, -day)
 ```
-
-    ## Rows: 822 Columns: 9
-    ## ── Column specification ────────────────────────────────────────────────────────
-    ## Delimiter: ","
-    ## dbl  (8): prez_gop, gov_gop, sen_gop, rep_gop, prez_dem, gov_dem, sen_dem, r...
-    ## date (1): mon
-    ## 
-    ## ℹ Use `spec()` to retrieve the full column specification for this data.
-    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
