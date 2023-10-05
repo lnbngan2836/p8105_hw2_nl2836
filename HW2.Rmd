@@ -130,7 +130,7 @@ gwynntrashwheel_data =
 
 Load baseline dataset.
 
-```{r load pols, message = FALSE}
+```{r load baseline, message = FALSE}
 baseline_data = 
   read_csv("./data_mci/MCI_baseline.csv", skip = 1) %>%
   janitor::clean_names() %>% 
@@ -149,4 +149,15 @@ baseline_data =
 view(baseline_data)
 ```
 
+Comments: 
+
+- The average baseline age is `r mean(as.numeric(baseline_data$age_at_onset))`
+
+
+```{r load amyloid, message = FALSE}
+amyl_data = 
+  read_csv("./data_mci/mci_amyloid.csv", skip = 1) %>%
+  janitor::clean_names() 
+view(amyl_data)
+```
 

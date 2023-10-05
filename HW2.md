@@ -134,4 +134,36 @@ gwynntrashwheel_data =
     homes_powered = (weight_tons*500)/30)
 ```
 
-# Problem 2
+# Problem 3
+
+Load baseline dataset.
+
+``` r
+baseline_data = 
+  read_csv("./data_mci/MCI_baseline.csv", skip = 1) %>%
+  janitor::clean_names() %>% 
+  mutate(
+    sex = case_when(
+      sex == 1 ~ "male",
+      sex == 0 ~ "female",
+      TRUE ~ NA_character_),
+    apoe4 = case_when(
+      apoe4 == 1 ~ "carrier",
+      apoe4 == 0 ~ "non-carrier",
+      TRUE ~ NA_character_)
+  ) %>% 
+  filter(age_at_onset != ".")
+
+view(baseline_data)
+```
+
+Comments:
+
+- The average baseline age is 70.2628866
+
+``` r
+amyl_data = 
+  read_csv("./data_mci/mci_amyloid.csv", skip = 1) %>%
+  janitor::clean_names() 
+view(amyl_data)
+```
