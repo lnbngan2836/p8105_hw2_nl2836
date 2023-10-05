@@ -8,6 +8,7 @@ Load the necessary libraries.
 ``` r
 library(tidyverse)
 library(readr)
+library(readxl)
 ```
 
 # Problem 1
@@ -18,6 +19,7 @@ Read the dataset pols-month into R Studio, then clean up accordingly.
 pols_data = 
   read_csv("./fivethirtyeight_datasets/pols-month.csv") %>% 
   separate(mon, into = c("year","month","day"), sep = "-") %>%
+  janitor::clean_names() %>% 
   mutate(
     month = month.abb[as.integer(month)],
     president = case_when(
@@ -26,8 +28,6 @@ pols_data =
       TRUE ~ NA_character_)
   ) %>% 
   select(-prez_dem, -prez_gop, -day)
-
-view(pols_data)
 ```
 
 Read the dataset snp into R Studio, then clean up accordingly.
@@ -35,6 +35,7 @@ Read the dataset snp into R Studio, then clean up accordingly.
 ``` r
 snp_data = 
   read_csv("./fivethirtyeight_datasets/snp.csv") %>% 
+  janitor::clean_names() %>% 
   mutate(
     date = as.Date(date, format = "%m/%d/%y"),
     year = format(date, "%Y"),
@@ -44,8 +45,6 @@ snp_data =
   select(-date) %>%
   arrange(year, month) %>% 
   select(year, month, everything())
-
-view(snp_data)
 ```
 
 Read the dataset unemployment into R Studio, then clean up accordingly.
@@ -53,14 +52,12 @@ Read the dataset unemployment into R Studio, then clean up accordingly.
 ``` r
 unemp_data = 
   read_csv("./fivethirtyeight_datasets/unemployment.csv") %>% 
+  janitor::clean_names() %>% 
   pivot_longer(
-    Jan:Dec,
+    jan:dec,
     names_to = "month",
     values_to = "unemployment_rate") %>% 
-  rename(year = Year) %>% 
-  mutate(year = as.character(year))
-
-view(unemp_data)
+ mutate(year = as.character(year))
 ```
 
 Merge the 3 datasets.
@@ -69,8 +66,6 @@ Merge the 3 datasets.
 merged_data = pols_data %>% 
   left_join(snp_data, by = c("year", "month")) %>% 
   left_join(unemp_data, by = c("year", "month"))
-  
-view(merged_data)
 ```
 
 View the merged dataset and short description.
@@ -91,4 +86,30 @@ The merged dataset `merged_data` from the 3 datasets `pols_data`,
   and `month`.
 - Additionally, `snp_data` contains the the closing values of the S&P
   stock index (`close`); `unemp_data` contains the unemployment rate
-  (`unemployment_rate`); the rest of the mentioned are `pols_data`.
+  (`unemployment_rate`); the rest of the mentioned variables are
+  `pols_data`.
+
+# Problem 2
+
+Rename the `202309 Trashwheel Collection Data` file locally to
+`trashwheel`.
+
+Load the dataset.
+
+``` r
+trashwheel_data = 
+  read_excel("./trashwheel.xlsx", sheet = "Mr. Trash Wheel") %>% 
+  janitor::clean_names() %>% 
+  select(dumpster:homes_powered) %>% 
+  drop_na(dumpster) %>% 
+  mutate(
+    home_powered = (weight_tons*500)/30)
+```
+
+    ## New names:
+    ## • `` -> `...15`
+    ## • `` -> `...16`
+
+``` r
+view(trashwheel_data)
+```

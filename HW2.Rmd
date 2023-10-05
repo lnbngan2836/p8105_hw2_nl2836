@@ -58,8 +58,8 @@ unemp_data =
   pivot_longer(
     jan:dec,
     names_to = "month",
-    values_to = "unemployment_rate")
-
+    values_to = "unemployment_rate") %>% 
+ mutate(year = as.character(year))
 ```
 
 Merge the 3 datasets.
@@ -92,11 +92,16 @@ Rename the `202309 Trashwheel Collection Data` file locally to `trashwheel`.
 
 Load the dataset.
 
-```{r load trashwheel}
+```{r load mr trashwheel}
 trashwheel_data = 
   read_excel("./trashwheel.xlsx", sheet = "Mr. Trash Wheel") %>% 
   janitor::clean_names() %>% 
-  select(dumpster:homes)
+  select(dumpster:homes_powered) %>% 
+  drop_na(dumpster) %>% 
+  mutate(
+    home_powered = (weight_tons*500)/30)
+
+view(trashwheel_data)
 ```
 
 
