@@ -10,6 +10,7 @@ Load the necessary libraries.
 ```{r setup, message=FALSE}
 library(tidyverse)
 library(readr)
+library(readxl)
 ```
 
 # Problem 1 
@@ -77,7 +78,7 @@ view(merged_data)
 
 View the merged dataset and short description.
 
-```{r}
+```{r view dataset}
 view(merged_data)
 ```
 
@@ -88,6 +89,11 @@ The merged dataset `merged_data` from the 3 datasets `pols_data`, `snp_data`, `u
 - `r ncol(merged_data)` columns (variables), and `r nrow(merged_data)` rows (observations).
 - Each of the three dataset was modified to have the variables `year` and `month`.
 - Additionally, `snp_data` contains the the closing values of the S&P stock index (`close`); `unemp_data` contains the unemployment rate (`unemployment_rate`); the rest of the mentioned variables are `pols_data`.
+
+
+# Problem 2
+
+Rename the `202309 Trashwheel Collection Data` file locally to `trashwheel`.
 
 
 
