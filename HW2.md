@@ -26,6 +26,8 @@ pols_data =
       TRUE ~ NA_character_)
   ) %>% 
   select(-prez_dem, -prez_gop, -day)
+
+view(pols_data)
 ```
 
 Read the dataset snp into R Studio, then clean up accordingly.
@@ -42,6 +44,8 @@ snp_data =
   select(-date) %>%
   arrange(year, month) %>% 
   select(year, month, everything())
+
+view(snp_data)
 ```
 
 Read the dataset unemployment into R Studio, then clean up accordingly.
@@ -53,7 +57,18 @@ unemp_data =
     Jan:Dec,
     names_to = "month",
     values_to = "unemployment_rate") %>% 
-  rename(year = Year)
+  rename(year = Year) %>% 
+  mutate(year = as.character(year))
 
 view(unemp_data)
+```
+
+Merge the 3 datasets.
+
+``` r
+merged_data = pols_data %>% 
+  left_join(snp_data, by = c("year", "month")) %>% 
+  left_join(unemp_data, by = c("year", "month"))
+  
+view(merged_data)
 ```

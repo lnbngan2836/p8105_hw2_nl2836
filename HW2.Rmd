@@ -68,9 +68,13 @@ view(unemp_data)
 Merge the 3 datasets.
 
 ```{r merge datasets}
-merged_data =
+merged_data = pols_data %>% 
+  left_join(snp_data, by = c("year", "month")) %>% 
+  left_join(unemp_data, by = c("year", "month"))
   
+view(merged_data)
 ```
+
 
 
 
